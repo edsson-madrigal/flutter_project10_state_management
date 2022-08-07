@@ -59,16 +59,29 @@ class TasksScreen extends StatelessWidget {
           ),
           Expanded(
             child: Container(
-              height: double.infinity,
-              width: double.infinity,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(20.0),
-                  topRight: Radius.circular(20.0),
+                padding: EdgeInsets.symmetric(
+                  horizontal: 20.0,
                 ),
-              ),
-            ),
+                height: double.infinity,
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(20.0),
+                    topRight: Radius.circular(20.0),
+                  ),
+                ),
+                child: ListView(
+                  children: [
+                    ListTile(
+                      title: Text('This is a task'),
+                      trailing: Checkbox(
+                        value: false,
+                        onChanged: (bool? value) {},
+                      ),
+                    ),
+                  ],
+                )),
           ),
         ],
       ),
