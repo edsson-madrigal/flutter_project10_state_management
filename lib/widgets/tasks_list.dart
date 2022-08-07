@@ -4,7 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_project10_state_management/modules/task.dart';
 import 'package:flutter_project10_state_management/widgets/tasks_tiles.dart';
 
-class TasksList extends StatelessWidget {
+class TasksList extends StatefulWidget {
+  @override
+  State<TasksList> createState() => _TasksListState();
+}
+
+class _TasksListState extends State<TasksList> {
   List<Task> tasks = [
     Task(name: 'Buy milk'),
     Task(name: 'Buy eggs'),
@@ -18,6 +23,11 @@ class TasksList extends StatelessWidget {
         return TasksTile(
           isChecked: tasks[index].isDone,
           taskTitle: tasks[index].name,
+          checkboxCallback: (bool? checkboxState) {
+            setState(() {
+              tasks[index].toggleDone();
+            });
+          },
         );
       },
       itemCount: tasks.length,
