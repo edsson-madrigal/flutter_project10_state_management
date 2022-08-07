@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
+import 'package:flutter_project10_state_management/widgets/tasks_list.dart';
 
 class TasksScreen extends StatelessWidget {
   const TasksScreen({Key? key}) : super(key: key);
@@ -71,20 +72,14 @@ class TasksScreen extends StatelessWidget {
                     topRight: Radius.circular(20.0),
                   ),
                 ),
-                child: ListView(
-                  children: [
-                    ListTile(
-                      title: Text('This is a task'),
-                      trailing: Checkbox(
-                        value: false,
-                        onChanged: (bool? value) {},
-                      ),
-                    ),
-                  ],
-                )),
+                child: TasksList()),
           ),
         ],
       ),
     );
   }
 }
+
+
+
+
