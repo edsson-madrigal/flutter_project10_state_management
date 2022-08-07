@@ -1,18 +1,11 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
+import 'package:flutter_project10_state_management/screens/add_task_screen.dart';
 import 'package:flutter_project10_state_management/widgets/tasks_list.dart';
 
 class TasksScreen extends StatelessWidget {
   const TasksScreen({Key? key}) : super(key: key);
-
-  Widget buildBottomSheet(BuildContext context) {
-    return Container(
-      child: Center(
-        child: Text('this is a bottom sheet'),
-      ),
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +15,15 @@ class TasksScreen extends StatelessWidget {
         onPressed: () {
           showModalBottomSheet(
             context: context,
-            builder: buildBottomSheet,
+            isScrollControlled: true,
+            // builder: (context) => Container() -- alternative method
+            builder: (context) => SingleChildScrollView(
+              child: Container(
+                padding: EdgeInsets.only(
+                    bottom: MediaQuery.of(context).viewInsets.bottom),
+                child: AddTaskScreen(),
+              ),
+            ),
           );
         },
         child: Icon(Icons.add),
