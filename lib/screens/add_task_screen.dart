@@ -1,12 +1,16 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, prefer_const_constructors_in_immutables, use_key_in_widget_constructors
 
 import 'package:flutter/material.dart';
 
 class AddTaskScreen extends StatelessWidget {
-  const AddTaskScreen({Key? key}) : super(key: key);
+  final Function addTaskCallback;
+
+  AddTaskScreen({required this.addTaskCallback});
 
   @override
   Widget build(BuildContext context) {
+    String? newTaskTitle;
+
     return Container(
       color: Color(0xFF757575),
       child: Container(
@@ -32,6 +36,9 @@ class AddTaskScreen extends StatelessWidget {
             TextField(
               autofocus: true,
               textAlign: TextAlign.center,
+              onChanged: (value) {
+                newTaskTitle = value;
+              },
             ),
             ElevatedButton(
               style: ButtonStyle(
@@ -39,7 +46,9 @@ class AddTaskScreen extends StatelessWidget {
                   Colors.lightBlueAccent,
                 ),
               ),
-              onPressed: () {},
+              onPressed: () {
+                addTaskCallback(newTaskTitle);
+              },
               child: Text('Add'),
             ),
           ],
