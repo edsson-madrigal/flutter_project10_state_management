@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, avoid_unnecessary_containers
+// ignore_for_file: prefer_const_constructors, avoid_unnecessary_containers, use_key_in_widget_constructors
 
 import 'package:flutter/material.dart';
 
@@ -7,49 +7,54 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  final String data = 'Data from Parent';
+  const MyApp();
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: Container(),
+          title: Container(child: Text(data),),
         ),
-        body: Level1(),
+        body: Level1(data),
       ),
     );
   }
 }
 
 class Level1 extends StatelessWidget {
-  const Level1({Key? key}) : super(key: key);
+  final String data;
+  const Level1(this.data);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Level2(),
+      child: Level2(data),
     );
   }
 }
 
 class Level2 extends StatelessWidget {
-  const Level2({Key? key}) : super(key: key);
+  final String data;
+  const Level2(this.data);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Level3(),
+      child: Level3(data),
     );
   }
 }
 
 class Level3 extends StatelessWidget {
-  const Level3({Key? key}) : super(key: key);
+  final String data;
+
+  const Level3(this.data);
 
   @override
   Widget build(BuildContext context) {
-    return Text('Final Data');
+    return Text(data);
   }
 }
 // // ignore_for_file: prefer_const_constructors
