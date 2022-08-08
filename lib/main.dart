@@ -8,18 +8,21 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  final String data = 'Data from Parent???';
   const MyApp();
 
   @override
   Widget build(BuildContext context) {
-    return Provider<String>(
-      create: ((context) => data),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (_) => Data(),
+        )
+      ],
       child: MaterialApp(
         home: Scaffold(
           appBar: AppBar(
             title: Container(
-              child: Text(data),
+              child: MyText(),
             ),
           ),
           body: Level1(),
@@ -41,8 +44,11 @@ class Level1 extends StatelessWidget {
 class Level2 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Level3(),
+    return Column(
+      children: [
+        MyTextField(),
+        Level3(),
+      ],
     );
   }
 }
@@ -50,9 +56,39 @@ class Level2 extends StatelessWidget {
 class Level3 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Text(Provider.of<String>(context));
+    return Text(context.watch<Data>().data);
   }
 }
+
+class MyText extends StatelessWidget {
+  const MyText({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(context.watch<Data>().data);
+  }
+}
+
+class MyTextField extends StatelessWidget {
+  const MyTextField({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return TextField(onChanged: (newValue) {
+      context.read<Data>().changeString(newValue);
+    });
+  }
+}
+
+class Data extends ChangeNotifier {
+  String data = 'Initial Data';
+  void changeString(String newString) {
+    data = newString;
+    notifyListeners();
+  }
+}
+
+
 // // ignore_for_file: prefer_const_constructors
 
 // import 'package:flutter/material.dart';
