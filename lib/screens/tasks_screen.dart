@@ -1,23 +1,15 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, avoid_print
 
 import 'package:flutter/material.dart';
-import 'package:flutter_project10_state_management/modules/task.dart';
 import 'package:flutter_project10_state_management/screens/add_task_screen.dart';
 import 'package:flutter_project10_state_management/widgets/tasks_list.dart';
+import 'package:provider/provider.dart';
 
-class TasksScreen extends StatefulWidget {
+import '../modules/task_data.dart';
+
+class TasksScreen extends StatelessWidget {
   const TasksScreen({Key? key}) : super(key: key);
 
-  @override
-  State<TasksScreen> createState() => _TasksScreenState();
-}
-
-class _TasksScreenState extends State<TasksScreen> {
-  List<Task> tasks = [
-    Task(name: 'Buy milk'),
-    Task(name: 'Buy eggs'),
-    Task(name: 'Buy bread'),
-  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,11 +26,11 @@ class _TasksScreenState extends State<TasksScreen> {
                     bottom: MediaQuery.of(context).viewInsets.bottom),
                 child: AddTaskScreen(
                   addTaskCallback: (newTaskTitle) {
-                    setState(() {
-                      tasks.add(
-                        Task(name: newTaskTitle),
-                      );
-                    });
+                    //setState(() {
+                      // tasks.add(
+                      //   Task(name: newTaskTitle),
+                      // );
+                    //});
                     Navigator.pop(context);
                   },
                 ),
@@ -83,7 +75,7 @@ class _TasksScreenState extends State<TasksScreen> {
                   ),
                 ),
                 Text(
-                  '${tasks.length} tasks',
+                  '${context.watch<TaskData>().taskCout} tasks',
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 18.0,
@@ -106,7 +98,7 @@ class _TasksScreenState extends State<TasksScreen> {
                   topRight: Radius.circular(20.0),
                 ),
               ),
-              child: TasksList(tasks: tasks),
+              child: TasksList(),
             ),
           ),
         ],
