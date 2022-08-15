@@ -1,12 +1,11 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, prefer_const_constructors_in_immutables, use_key_in_widget_constructors
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../modules/task_data.dart';
 
 class AddTaskScreen extends StatelessWidget {
-  final Function addTaskCallback;
-
-  AddTaskScreen({required this.addTaskCallback});
-
   @override
   Widget build(BuildContext context) {
     String? newTaskTitle;
@@ -47,7 +46,8 @@ class AddTaskScreen extends StatelessWidget {
                 ),
               ),
               onPressed: () {
-                addTaskCallback(newTaskTitle);
+                context.read<TaskData>().addTask(newTaskTitle!);
+                Navigator.pop(context);
               },
               child: Text('Add'),
             ),
